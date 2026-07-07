@@ -1,0 +1,11 @@
+{
+  "title": "Vite + React + Tailwind",
+  "apiMessage": "API message:",
+  "itemName": "Item name",
+  "price": "Price",
+  "createButton": "Create Item",
+  "createdItems": "Created Items",
+  "noItems": "No items yet — create one above.",
+  "id": "ID",
+  "language": "Language"
+}

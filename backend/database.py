@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # MariaDB 연결 설정
-DATABASE_URL = "mysql+pymysql://skycow79:user1234@localhost:3306/fastapi_db"
+DATABASE_URL = "mysql+pymysql://skycow79:user1234@localhost:3306/backcastingDB"
 
 engine = create_engine(
     DATABASE_URL,

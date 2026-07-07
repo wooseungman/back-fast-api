@@ -2,4 +2,115 @@
 @tailwind components;
 @tailwind utilities;
 
-body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: #f4f1eb;
+  }
+
+  body {
+    margin: 0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f4f1eb;
+  }
+
+  button,
+  input,
+  select {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .dashboard-input {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #d8d1c4;
+    background: #fffdfa;
+    padding: 0 12px;
+    color: #27231f;
+    outline: none;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.65);
+    transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+  }
+
+  .dashboard-input:focus {
+    border-color: #d50032;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgb(213 0 50 / 0.12);
+  }
+
+  /* Sidebar Navigation */
+  .nav-sidebar {
+    @apply w-64 bg-gray-900 text-white p-6 overflow-y-auto border-r border-gray-800;
+  }
+
+  .nav-logo {
+    @apply mb-8;
+  }
+
+  .nav-title {
+    @apply text-2xl font-bold leading-tight;
+  }
+
+  .font-bold-rose-600 {
+    @apply font-bold text-rose-600;
+  }
+
+  /* Menu Items */
+  .menu-item {
+    @apply px-4 py-3 rounded-lg cursor-pointer transition-all duration-200;
+  }
+
+  .menu-item-base {
+    @apply text-gray-300 hover:bg-gray-800 hover:text-white;
+  }
+
+  .menu-item-active,
+  .menu-item.active {
+    @apply bg-rose-600 text-white font-semibold;
+  }
+
+  /* Main Content */
+  .main-content {
+    @apply flex-1 p-8 overflow-y-auto;
+  }
+
+  .page-title {
+    @apply text-4xl font-bold text-gray-900 mb-2;
+  }
+
+  .page-subtitle {
+    @apply text-lg text-gray-600 mb-6;
+  }
+
+  /* Chat Aside */
+  .aside-chat {
+    @apply w-80 bg-white border-l border-gray-200 flex flex-col;
+  }
+
+  .chat-header {
+    @apply bg-gray-50 border-b border-gray-200 px-4 py-3 font-semibold text-gray-900;
+  }
+
+  .chat-box {
+    @apply flex-1 space-y-4 overflow-y-auto bg-slate-50 p-4;
+  }
+
+  .chat-input-area {
+    @apply border-t border-gray-200 p-4 flex gap-2;
+  }
+
+  /* Form Fields */
+  .field-base {
+    @apply px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-600 focus:ring-2 focus:ring-rose-100 transition-all;
+  }
+
+  /* Buttons */
+  .btn-dark {
+    @apply px-4 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 active:bg-gray-950 transition-colors;
+  }
+}

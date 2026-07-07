@@ -1,0 +1,11 @@
+{
+  "title": "Vite + React + Tailwind",
+  "apiMessage": "API 메시지:",
+  "itemName": "상품명",
+  "price": "가격",
+  "createButton": "상품 생성",
+  "createdItems": "생성된 상품",
+  "noItems": "생성된 상품이 없습니다 — 위에서 상품을 생성하세요.",
+  "id": "ID",
+  "language": "언어"
+}

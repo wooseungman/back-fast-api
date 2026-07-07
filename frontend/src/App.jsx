@@ -1,76 +1,48 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+
+const menuItems = ['Crude', 'Diesel', 'Gasoline', 'FO', 'Aromatics']
 
 export default function App() {
-  const [message, setMessage] = useState('loading...')
-  const [items, setItems] = useState([])
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
-
-  useEffect(() => {
-    fetch('/api/hello')
-      .then((r) => r.json())
-      .then((d) => setMessage(d.message))
-      .catch(() => setMessage('failed'))
-
-    // load items (since backend uses in-memory fake_db, there is no list endpoint; this is just demo)
-  }, [])
-
-  const createItem = async (e) => {
-    e.preventDefault()
-    const id = Math.floor(Math.random() * 100000)
-    const payload = { id, name, price: parseFloat(price || 0) }
-    try {
-      const res = await fetch('/api/items/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      if (res.ok) {
-        const item = await res.json()
-        setItems((s) => [item, ...s])
-        setName('')
-        setPrice('')
-      }
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50 flex items-start justify-center py-12">
-      <div className="w-full max-w-2xl bg-white shadow-md rounded-lg p-8">
-        <h1 className="text-2xl font-semibold mb-2">Vite + React + Tailwind</h1>
-        <p className="text-sm text-gray-600 mb-6">API message: <span className="font-medium">{message}</span></p>
-
-        <form onSubmit={createItem} className="mb-6">
-          <div className="grid grid-cols-3 gap-3">
-            <input className="col-span-2 p-2 border rounded" placeholder="Item name" value={name} onChange={(e)=>setName(e.target.value)} />
-            <input className="p-2 border rounded" placeholder="Price" value={price} onChange={(e)=>setPrice(e.target.value)} />
-          </div>
-          <div className="mt-3">
-            <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Create Item</button>
-          </div>
-        </form>
-
-        <div>
-          <h2 className="text-lg font-medium mb-3">Created Items</h2>
-          {items.length === 0 ? (
-            <p className="text-sm text-gray-500">No items yet — create one above.</p>
-          ) : (
-            <ul className="space-y-2">
-              {items.map((it) => (
-                <li key={it.id} className="p-3 border rounded flex justify-between items-center">
-                  <div>
-                    <div className="font-medium">{it.name}</div>
-                    <div className="text-sm text-gray-500">ID: {it.id}</div>
-                  </div>
-                  <div className="font-semibold">${it.price}</div>
-                </li>
-              ))}
-            </ul>
-          )}
+    <div className="flex h-full">
+      {/* 사이드바 */}
+      <nav className="nav-sidebar">
+        <div className="nav-logo">
+          <h2 className="nav-title">
+            <span className="font-bold-rose-600">SKI</span> VCO<br/>Back-casting
+          </h2>
         </div>
-      </div>
+        <ul className="mt-5 list-none" id="menu-list">
+          <li className="menu-item menu-item-base" data-menu="Crude">Crude</li>
+          <li className="menu-item menu-item-base" data-menu="Diesel">Diesel</li>
+          <li className="menu-item menu-item-base menu-item-active active" data-menu="Gasoline">Gasoline</li>
+          <li className="menu-item menu-item-base" data-menu="FO">FO</li>
+          <li className="menu-item menu-item-base" data-menu="Aromatics">Aromatics</li>
+        </ul>
+      </nav>
+
+      {/* 메인 콘덴트 */}
+      <main className="main-content">
+        <h1 className="page-title" id="main-title">Gasoline VCO Back-casting</h1>
+        <p className="page-subtitle">판매 및 생산 부문 계획(Plan) 대비 실적(Actual) 분석</p>
+      </main>
+
+      {/* AI 채탕 패널 */}
+      <aside className="aside-chat">
+        <div className="chat-header">
+          <span className="text-rose-600">AI</span> 데이터 분석 Assistant
+        </div>
+        <div className="chat-box" id="chat-box">
+          <div className="max-w-[85%] rounded-lg rounded-tl-none bg-slate-200 px-4 text-[0.9rem] leading-6 text-slate-800">
+            안녕하세요. SKI VCO AI입니다.<br/>현재 화면의 데이터 트렌드, 수출 프리미엄 원인 분석들에 대해 질문해 주세요.
+          </div>
+        </div>
+        <div className="chat-input-area">
+          <input id="llm-input" type="text" placeholder="질문 입력..." className="field-base flex-1" />
+          <button id="llm-send" className="btn-dark">전송</button>
+        </div>
+      </aside>
     </div>
   )
+
 }
