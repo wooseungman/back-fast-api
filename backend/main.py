@@ -1,8 +1,9 @@
-from fastapi import FastAPI, BackgroundTasks, HTTPException
+from fastapi import FastAPI, BackgroundTasks, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Optional
+from database import engine, get_db, Base
 
 app = FastAPI(
     title="Sample FastAPI App",
@@ -11,6 +12,9 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
 )
+
+# 데이터베이스 테이블 생성
+Base.metadata.create_all(bind=engine)
 
 # 개발용 CORS 설정: Vite dev 서버를 허용
 origins = [
