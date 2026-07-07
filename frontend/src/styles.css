@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
   * {
@@ -43,74 +41,147 @@
     box-shadow: 0 0 0 3px rgb(213 0 50 / 0.12);
   }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
   /* Sidebar Navigation */
   .nav-sidebar {
-    @apply w-64 bg-gray-900 text-white p-6 overflow-y-auto border-r border-gray-800;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    background-color: #0f172a;
+    color: #fff;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
 
   .nav-logo {
-    @apply mb-8;
+    border-bottom: 1px solid #334155;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
   }
 
   .nav-title {
-    @apply text-2xl font-bold leading-tight;
+    font-size: 1.3rem;
+    line-height: 1.375rem;
+    font-weight: 600;
   }
 
   .font-bold-rose-600 {
-    @apply font-bold text-rose-600;
+    font-weight: 700;
+    color: rgb(225 29 72);
   }
 
   /* Menu Items */
   .menu-item {
-    @apply px-4 py-3 rounded-lg cursor-pointer transition-all duration-200;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 200ms;
   }
 
   .menu-item-base {
-    @apply text-gray-300 hover:bg-gray-800 hover:text-white;
+    color: rgb(209 213 219);
+  }
+
+  .menu-item-base:hover {
+    background-color: rgb(31 41 55);
+    color: rgb(255 255 255);
   }
 
   .menu-item-active,
   .menu-item.active {
-    @apply bg-rose-600 text-white font-semibold;
+    background-color: rgb(225 29 72);
+    color: rgb(255 255 255);
+    font-weight: 600;
   }
 
   /* Main Content */
   .main-content {
-    @apply flex-1 p-8 overflow-y-auto;
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
   }
 
   .page-title {
-    @apply text-4xl font-bold text-gray-900 mb-2;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    color: rgb(17 24 39);
+    margin-bottom: 0.5rem;
   }
 
   .page-subtitle {
-    @apply text-lg text-gray-600 mb-6;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: rgb(75 85 99);
+    margin-bottom: 1.5rem;
   }
 
   /* Chat Aside */
   .aside-chat {
-    @apply w-80 bg-white border-l border-gray-200 flex flex-col;
+    width: 20rem;
+    background-color: rgb(255 255 255);
+    border-left: 1px solid rgb(229 231 235);
+    display: flex;
+    flex-direction: column;
   }
 
   .chat-header {
-    @apply bg-gray-50 border-b border-gray-200 px-4 py-3 font-semibold text-gray-900;
+    background-color: rgb(249 250 251);
+    border-bottom: 1px solid rgb(229 231 235);
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: rgb(17 24 39);
   }
 
   .chat-box {
-    @apply flex-1 space-y-4 overflow-y-auto bg-slate-50 p-4;
+    flex: 1;
+    gap: 1rem;
+    overflow-y: auto;
+    background-color: rgb(248 250 252);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
   }
 
   .chat-input-area {
-    @apply border-t border-gray-200 p-4 flex gap-2;
+    border-top: 1px solid rgb(229 231 235);
+    padding: 1rem;
+    display: flex;
+    gap: 0.5rem;
   }
 
   /* Form Fields */
   .field-base {
-    @apply px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-600 focus:ring-2 focus:ring-rose-100 transition-all;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgb(209 213 219);
+    border-radius: 0.5rem;
+    outline: none;
+    transition: all;
+  }
+
+  .field-base:focus {
+    border-color: rgb(225 29 72);
+    box-shadow: 0 0 0 2px rgb(244 114 182);
   }
 
   /* Buttons */
   .btn-dark {
-    @apply px-4 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 active:bg-gray-950 transition-colors;
+    padding: 0.5rem 1rem;
+    background-color: rgb(17 24 39);
+    color: rgb(255 255 255);
+    border-radius: 0.5rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color;
+  }
+
+  .btn-dark:hover {
+    background-color: rgb(31 41 55);
+  }
+
+  .btn-dark:active {
+    background-color: rgb(7 8 10);
   }
 }
