@@ -4,6 +4,8 @@ import DashboardPage from './DashboardPage'
 const page = {
   title: 'FO Performance Review',
   subtitle: '중유 제품 수요, 재고, 출하 계획 대비 실적 분석',
+  tableTitle: 'FO 데이터 조회 결과',
+  tableSubtitle: '중유 수요처별 Plan, Actual, Gap, Rate를 비교합니다.',
   chartTitle: 'FO Shipment Trend',
   chartCaption: 'Weekly shipment execution',
   chartBars: [66, 54, 61, 49, 57, 63, 58, 70],

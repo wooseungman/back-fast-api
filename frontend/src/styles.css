@@ -395,6 +395,47 @@
     min-width: 9.5rem;
   }
 
+  .toolbar-field .react-datepicker-wrapper {
+    display: block;
+  }
+
+  .datepicker-input {
+    cursor: pointer;
+  }
+
+  .react-datepicker {
+    border: 1px solid rgb(226 232 240);
+    border-radius: 0.75rem;
+    box-shadow: 0 18px 45px rgb(15 23 42 / 0.16);
+    font-family: inherit;
+    overflow: hidden;
+  }
+
+  .react-datepicker__header {
+    border-bottom: 1px solid rgb(226 232 240);
+    background: rgb(248 250 252);
+  }
+
+  .react-datepicker__current-month,
+  .react-datepicker-time__header,
+  .react-datepicker-year-header {
+    color: #111827;
+    font-weight: 800;
+  }
+
+  .react-datepicker__day--selected,
+  .react-datepicker__day--in-selecting-range,
+  .react-datepicker__day--in-range,
+  .react-datepicker__day--keyboard-selected {
+    background: #111827;
+    color: #ffffff;
+  }
+
+  .react-datepicker__day--range-start,
+  .react-datepicker__day--range-end {
+    background: #e11d48;
+  }
+
   .content-kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -618,6 +659,13 @@
     border-radius: 0.65rem;
   }
 
+  .table-subtitle {
+    margin-top: 0.35rem;
+    color: rgb(100 116 139);
+    font-size: 0.86rem;
+    line-height: 1.35rem;
+  }
+
   .data-table {
     width: 100%;
     border-collapse: collapse;
@@ -646,6 +694,86 @@
 
   .data-table tr:last-child td {
     border-bottom: 0;
+  }
+
+  .public-api-panel {
+    border-color: rgb(20 184 166 / 0.26);
+  }
+
+  .public-api-heading {
+    align-items: flex-start;
+  }
+
+  .public-api-heading > div:first-child {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .public-api-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .public-api-status {
+    display: inline-flex;
+    align-items: center;
+    height: 2.35rem;
+    border-radius: 999px;
+    padding: 0 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .public-api-status-success {
+    background: rgb(20 184 166 / 0.12);
+    color: #0f766e;
+  }
+
+  .public-api-status-loading {
+    background: rgb(241 245 249);
+    color: rgb(71 85 105);
+  }
+
+  .public-api-status-fallback {
+    background: rgb(245 158 11 / 0.14);
+    color: #b45309;
+  }
+
+  .public-api-meta {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.9rem;
+    border: 1px solid rgb(226 232 240);
+    border-radius: 0.55rem;
+    background: rgb(248 250 252);
+    padding: 0.65rem 0.75rem;
+    color: rgb(100 116 139);
+    font-size: 0.78rem;
+  }
+
+  .public-api-meta span {
+    font-weight: 900;
+  }
+
+  .public-api-meta code {
+    overflow: hidden;
+    color: rgb(51 65 85);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .public-api-error {
+    margin-bottom: 0.9rem;
+    border-radius: 0.55rem;
+    background: rgb(245 158 11 / 0.12);
+    padding: 0.65rem 0.75rem;
+    color: #92400e;
+    font-size: 0.82rem;
+    font-weight: 700;
   }
 
   @media (max-width: 1280px) {
@@ -877,9 +1005,9 @@
   .btn-primary {
     height: 2.35rem;
     padding: 0 1rem;
-    background: #e11d48;
+    background: #111827;
     color: #fff;
-    box-shadow: 0 10px 20px rgb(225 29 72 / 0.2);
+    box-shadow: 0 10px 20px rgb(15 23 42 / 0.2);
   }
 
   .btn-soft {
@@ -896,6 +1024,25 @@
     background: #111827;
     color: #fff;
     font-size: 1.1rem;
+  }
+
+  .btn-with-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+  }
+
+  .btn-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.2;
   }
 
   .btn-primary:hover,

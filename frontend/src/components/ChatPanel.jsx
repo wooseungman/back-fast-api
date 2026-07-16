@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function ChatPanel() {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    if (typeof window === 'undefined') return false
+
+    return window.localStorage.getItem('vco:chat-panel-collapsed') === 'true'
+  })
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -10,6 +14,10 @@ export default function ChatPanel() {
     },
   ])
   const [input, setInput] = useState('')
+
+  useEffect(() => {
+    window.localStorage.setItem('vco:chat-panel-collapsed', String(isCollapsed))
+  }, [isCollapsed])
 
   const handleSend = () => {
     if (input.trim() === '') return

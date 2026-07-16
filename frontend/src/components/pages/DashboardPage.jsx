@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const currentUser = {
   department: 'VCO Planning Team',
@@ -8,7 +10,31 @@ const currentUser = {
     'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96"%3E%3Cdefs%3E%3ClinearGradient id="g" x1="0" x2="1" y1="0" y2="1"%3E%3Cstop stop-color="%23e11d48"/%3E%3Cstop offset="1" stop-color="%23fb7185"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="96" height="96" rx="28" fill="%23fff1f2"/%3E%3Ccircle cx="48" cy="38" r="18" fill="url(%23g)"/%3E%3Cpath d="M20 82c4-18 16-28 28-28s24 10 28 28" fill="url(%23g)"/%3E%3C/svg%3E',
 }
 
+function SearchIcon() {
+  return (
+    <svg className="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m21 21-4.3-4.3" />
+      <circle cx="11" cy="11" r="7" />
+    </svg>
+  )
+}
+
+function ResetIcon() {
+  return (
+    <svg className="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 12a9 9 0 1 0 3-6.7" />
+      <path d="M3 4v6h6" />
+    </svg>
+  )
+}
+
 export default function DashboardPage({ menuName, page }) {
+  const defaultDateRange = [new Date(2026, 6, 1), new Date(2026, 6, 16)]
+  const [dateRange, setDateRange] = useState(defaultDateRange)
+  const [startDate, endDate] = dateRange
+  const tableTitle = page.tableTitle ?? `${menuName} 조회 결과`
+  const tableSubtitle = page.tableSubtitle ?? page.subtitle
+
   return (
     <main className="main-content">
       <header className="content-header">
@@ -17,7 +43,6 @@ export default function DashboardPage({ menuName, page }) {
           <h1 className="page-title" id="main-title">
             {page.title}
           </h1>
-          <p className="page-subtitle">{page.subtitle}</p>
         </div>
         <div className="user-summary" aria-label="접속 사용자 정보">
           <img
@@ -45,64 +70,51 @@ export default function DashboardPage({ menuName, page }) {
       <section className="content-toolbar" aria-label="조회 조건">
         <div className="toolbar-group">
           <label className="toolbar-field">
-            <span>Period</span>
-            <select className="dashboard-input">
-              <option>2026.07 MTD</option>
-              <option>2026 Q3</option>
-              <option>2026 YTD</option>
-            </select>
+            <span>기간</span>
+            <DatePicker
+              className="dashboard-input datepicker-input"
+              dateFormat="yyyy.MM.dd"
+              endDate={endDate}
+              onChange={(dates) => setDateRange(dates)}
+              placeholderText="기간 선택"
+              selectsRange
+              startDate={startDate}
+            />
           </label>
           <label className="toolbar-field">
-            <span>Region</span>
+            <span>권역</span>
             <select className="dashboard-input">
               <option>All markets</option>
               <option>Domestic</option>
               <option>Export</option>
             </select>
           </label>
+          <label className="toolbar-field">
+            <span>제품</span>
+            <select className="dashboard-input">
+              <option>{menuName}</option>
+            </select>
+          </label>
         </div>
         <div className="toolbar-actions">
-          <button className="btn-soft">Reset</button>
-          <button className="btn-primary">Apply</button>
+          <button type="button" className="btn-soft btn-with-icon" onClick={() => setDateRange(defaultDateRange)}>
+            <ResetIcon />
+            초기화
+          </button>
+          <button type="button" className="btn-primary btn-with-icon">
+            <SearchIcon />
+            조회
+          </button>
         </div>
-      </section>
-
-      <section className="content-kpi-grid" aria-label="요약 지표">
-        {page.kpis.map((kpi) => (
-          <article className={`content-card kpi-card kpi-${kpi.tone}`} key={kpi.label}>
-            <div className="kpi-card-top">
-              <h3 className="content-card-title">{kpi.label}</h3>
-              <span className="kpi-status">{kpi.delta}</span>
-            </div>
-            <div className="kpi-value">
-              {kpi.value}
-              <span>{kpi.unit}</span>
-            </div>
-            <div className="kpi-track">
-              <span style={{ width: `${kpi.progress}%` }} />
-            </div>
-          </article>
-        ))}
-      </section>
-
-      <section className="content-chart-grid content-chart-grid-single" aria-label={`${menuName} 차트`}>
-        <article className="content-panel">
-          <div className="panel-heading">
-            <h3 className="content-panel-title">{page.chartTitle}</h3>
-            <span>{page.chartCaption}</span>
-          </div>
-          <div className="chart-preview line-chart-preview" aria-label={`${menuName} 트렌드 차트 미리보기`}>
-            {page.chartBars.map((height, index) => (
-              <span key={`${menuName}-bar-${index}`} style={{ height: `${height}%` }} />
-            ))}
-          </div>
-        </article>
       </section>
 
       <section className="content-table-section" aria-label={`${menuName} 상세 데이터`}>
         <article className="content-panel">
           <div className="panel-heading">
-            <h3 className="content-panel-title">{menuName} 상세 데이터</h3>
+            <div>
+              <h3 className="content-panel-title">{tableTitle}</h3>
+              <p className="table-subtitle">{tableSubtitle}</p>
+            </div>
             <span>Plan / Actual / Gap</span>
           </div>
           <div className="data-table-wrap">

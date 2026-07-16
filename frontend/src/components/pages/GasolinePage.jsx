@@ -4,6 +4,8 @@ import DashboardPage from './DashboardPage'
 const page = {
   title: 'Gasoline Performance Review',
   subtitle: '휘발유 판매 및 생산 부문 계획 대비 실적 분석',
+  tableTitle: 'Gasoline 데이터 조회 결과',
+  tableSubtitle: '휘발유 판매 구분별 Plan, Actual, Gap, Rate를 비교합니다.',
   chartTitle: 'Gasoline Margin Trend',
   chartCaption: 'Daily volume and margin signal',
   chartBars: [42, 58, 50, 72, 62, 82, 74, 78],

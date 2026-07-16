@@ -4,6 +4,8 @@ import DashboardPage from './DashboardPage'
 const page = {
   title: 'Diesel Performance Review',
   subtitle: '경유 생산 및 판매 실적의 계획 대비 달성률 분석',
+  tableTitle: 'Diesel 데이터 조회 결과',
+  tableSubtitle: '경유 채널별 Plan, Actual, Gap, Rate를 비교합니다.',
   chartTitle: 'Diesel Sales Trend',
   chartCaption: 'Domestic / export demand',
   chartBars: [52, 58, 67, 61, 79, 86, 82, 90],

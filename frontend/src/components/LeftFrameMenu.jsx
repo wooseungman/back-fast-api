@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const menuItems = ['Crude', 'Diesel', 'Gasoline', 'FO', 'Aromatics']
 
@@ -10,8 +10,20 @@ const menuMeta = {
   Aromatics: 'AR',
 }
 
+const LEFT_MENU_COLLAPSED_KEY = 'vco:left-menu-collapsed'
+
+function getSavedCollapsedState(storageKey) {
+  if (typeof window === 'undefined') return false
+
+  return window.localStorage.getItem(storageKey) === 'true'
+}
+
 export default function LeftFrameMenu({ activeMenu, onMenuSelect }) {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(() => getSavedCollapsedState(LEFT_MENU_COLLAPSED_KEY))
+
+  useEffect(() => {
+    window.localStorage.setItem(LEFT_MENU_COLLAPSED_KEY, String(isCollapsed))
+  }, [isCollapsed])
 
   return (
     <nav className={`nav-sidebar${isCollapsed ? ' nav-sidebar-collapsed' : ''}`}>

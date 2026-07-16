@@ -4,6 +4,8 @@ import DashboardPage from './DashboardPage'
 const page = {
   title: 'Aromatics Performance Review',
   subtitle: '방향족 제품별 생산 계획, 출하 실적, 수익성 신호 분석',
+  tableTitle: 'Aromatics 데이터 조회 결과',
+  tableSubtitle: '방향족 제품별 Plan, Actual, Gap, Rate를 비교합니다.',
   chartTitle: 'Aromatics Product Mix',
   chartCaption: 'PX / BZ / TL execution',
   chartBars: [74, 69, 78, 85, 80, 92, 87, 95],

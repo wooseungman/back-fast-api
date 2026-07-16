@@ -4,6 +4,8 @@ import DashboardPage from './DashboardPage'
 const page = {
   title: 'Crude Performance Review',
   subtitle: '원유 도입 계획 대비 실제 투입량 및 수급 Gap 분석',
+  tableTitle: 'Crude 데이터 조회 결과',
+  tableSubtitle: '원유 유형별 Plan, Actual, Gap, Rate를 비교합니다.',
   chartTitle: 'Crude Intake Trend',
   chartCaption: 'Daily intake volume',
   chartBars: [48, 64, 58, 76, 69, 83, 71, 88],
