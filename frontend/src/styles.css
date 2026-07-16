@@ -50,6 +50,15 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  .app-shell {
+    background: #f6f7fb;
+    transition: background-color 220ms ease;
+  }
+
+  .app-shell-admin {
+    background: #f3faf8;
+  }
+
   /* Sidebar Navigation */
   .nav-sidebar {
     z-index: 10;
@@ -68,6 +77,13 @@
 
   .nav-sidebar-collapsed {
     width: 4.25rem;
+  }
+
+  .nav-sidebar-admin {
+    background:
+      linear-gradient(180deg, rgb(12 64 61 / 0.98), rgb(15 23 42)),
+      #0f3f3c;
+    box-shadow: 10px 0 28px rgb(15 118 110 / 0.2);
   }
 
   .nav-logo {
@@ -120,6 +136,11 @@
     font-weight: 800;
   }
 
+  .nav-sidebar-admin .brand-mark {
+    background: linear-gradient(135deg, #0f766e, #2dd4bf);
+    box-shadow: 0 12px 24px rgb(15 118 110 / 0.28);
+  }
+
   .nav-toggle-button {
     display: grid;
     place-items: center;
@@ -158,6 +179,10 @@
     color: rgb(225 29 72);
   }
 
+  .nav-sidebar-admin .font-bold-rose-600 {
+    color: #5eead4;
+  }
+
   /* Menu Items */
   .menu-item {
     display: flex;
@@ -192,6 +217,12 @@
     color: rgb(255 255 255);
     font-weight: 600;
     box-shadow: inset 3px 0 0 #fb7185;
+  }
+
+  .nav-sidebar-admin .menu-item-active,
+  .nav-sidebar-admin .menu-item.active {
+    background-color: rgb(20 184 166 / 0.16);
+    box-shadow: inset 3px 0 0 #5eead4;
   }
 
   .menu-item-code {
@@ -262,6 +293,13 @@
       #f6f7fb;
   }
 
+  .app-shell-admin .main-content,
+  .admin-main-content {
+    background:
+      radial-gradient(circle at top left, rgb(20 184 166 / 0.12), transparent 28rem),
+      #f3faf8;
+  }
+
   .page-title {
     font-size: 2rem;
     line-height: 2.35rem;
@@ -295,6 +333,45 @@
     text-transform: uppercase;
   }
 
+  .admin-eyebrow,
+  .app-shell-admin .page-eyebrow,
+  .app-shell-admin .user-summary-label {
+    color: #0f766e;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .admin-mode-button {
+    height: 2.45rem;
+    border: 1px solid rgb(226 232 240);
+    border-radius: 0.55rem;
+    background: #ffffff;
+    color: rgb(51 65 85);
+    cursor: pointer;
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 900;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .admin-mode-button:hover {
+    border-color: rgb(20 184 166 / 0.35);
+    background: rgb(20 184 166 / 0.08);
+    color: #0f766e;
+    transform: translateY(-1px);
+  }
+
+  .admin-mode-button-active {
+    border-color: rgb(20 184 166 / 0.35);
+    background: #0f766e;
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgb(15 118 110 / 0.18);
+  }
+
   .user-summary {
     display: flex;
     align-items: center;
@@ -316,6 +393,11 @@
     border-radius: 0.75rem;
     object-fit: cover;
     box-shadow: 0 10px 24px rgb(225 29 72 / 0.16);
+  }
+
+  .app-shell-admin .user-avatar,
+  .admin-user-summary .user-avatar {
+    box-shadow: 0 10px 24px rgb(15 118 110 / 0.16);
   }
 
   .user-summary-body {
@@ -373,6 +455,12 @@
     background: rgb(255 255 255 / 0.86);
     padding: 0.9rem;
     box-shadow: 0 10px 30px rgb(15 23 42 / 0.05);
+  }
+
+  .app-shell-admin .content-toolbar,
+  .admin-toolbar {
+    border-color: rgb(20 184 166 / 0.2);
+    background: rgb(255 255 255 / 0.9);
   }
 
   .toolbar-group,
@@ -464,6 +552,12 @@
     border: 1px solid rgb(226 232 240);
     border-radius: 0.75rem;
     box-shadow: 0 14px 34px rgb(15 23 42 / 0.06);
+  }
+
+  .app-shell-admin .content-panel,
+  .admin-panel {
+    border-color: rgb(20 184 166 / 0.22);
+    box-shadow: 0 14px 34px rgb(15 118 110 / 0.08);
   }
 
   .content-card {
@@ -690,6 +784,11 @@
     color: rgb(100 116 139);
     font-size: 0.75rem;
     font-weight: 800;
+  }
+
+  .app-shell-admin .data-table th {
+    background: rgb(240 253 250);
+    color: #0f766e;
   }
 
   .data-table tr:last-child td {
@@ -1000,6 +1099,24 @@
     cursor: pointer;
     font-weight: 800;
     transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  }
+
+  .btn-admin-primary {
+    height: 2.35rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: #0f766e;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0 1rem;
+    font-weight: 800;
+    box-shadow: 0 10px 20px rgb(15 118 110 / 0.2);
+    transition: transform 160ms ease, background-color 160ms ease;
+  }
+
+  .btn-admin-primary:hover {
+    background: #115e59;
+    transform: translateY(-1px);
   }
 
   .btn-primary {

@@ -22,6 +22,6 @@ const page = {
   ],
 }
 
-export default function CrudePage() {
-  return <DashboardPage menuName="Crude" page={page} />
+export default function CrudePage(props) {
+  return <DashboardPage menuName="Crude" page={page} {...props} />
 }

@@ -22,6 +22,6 @@ const page = {
   ],
 }
 
-export default function GasolinePage() {
-  return <DashboardPage menuName="Gasoline" page={page} />
+export default function GasolinePage(props) {
+  return <DashboardPage menuName="Gasoline" page={page} {...props} />
 }

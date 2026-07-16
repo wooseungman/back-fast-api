@@ -1,15 +1,23 @@
+import os
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# MariaDB 연결 설정
-DATABASE_URL = "mysql+pymysql://skycow79:user1234@localhost:3306/backcastingDB"
+import config
+
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "mysql+pymysql://skycow79:user1234@localhost:3306/backcastingDB",
+)
 
 engine = create_engine(
     DATABASE_URL,
-    echo=True,              # SQL 쿼리 출력 (개발용)
-    pool_pre_ping=True,     # 연결 상태 확인
+    echo=os.getenv("SQL_ECHO", "false").lower() == "true",
+    pool_pre_ping=True,
 )
+
+APP_ENV = config.APP_ENV
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

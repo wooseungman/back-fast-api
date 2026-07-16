@@ -22,6 +22,6 @@ const page = {
   ],
 }
 
-export default function DieselPage() {
-  return <DashboardPage menuName="Diesel" page={page} />
+export default function DieselPage(props) {
+  return <DashboardPage menuName="Diesel" page={page} {...props} />
 }

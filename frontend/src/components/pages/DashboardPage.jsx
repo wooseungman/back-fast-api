@@ -28,7 +28,7 @@ function ResetIcon() {
   )
 }
 
-export default function DashboardPage({ menuName, page }) {
+export default function DashboardPage({ menuName, page, isAdminMode, onToggleAdmin }) {
   const defaultDateRange = [new Date(2026, 6, 1), new Date(2026, 6, 16)]
   const [dateRange, setDateRange] = useState(defaultDateRange)
   const [startDate, endDate] = dateRange
@@ -44,25 +44,34 @@ export default function DashboardPage({ menuName, page }) {
             {page.title}
           </h1>
         </div>
-        <div className="user-summary" aria-label="접속 사용자 정보">
-          <img
-            className="user-avatar"
-            src={currentUser.profileImage}
-            alt={`${currentUser.name} 프로필 사진`}
-          />
-          <div className="user-summary-body">
-            <span className="user-summary-label">접속 사용자</span>
-            <strong>{currentUser.name}</strong>
-            <dl className="user-meta">
-              <div>
-                <dt>부서</dt>
-                <dd>{currentUser.department}</dd>
-              </div>
-              <div>
-                <dt>사번</dt>
-                <dd>{currentUser.employeeId}</dd>
-              </div>
-            </dl>
+        <div className="header-actions">
+          <button
+            type="button"
+            className={`admin-mode-button${isAdminMode ? ' admin-mode-button-active' : ''}`}
+            onClick={onToggleAdmin}
+          >
+            Admin
+          </button>
+          <div className="user-summary" aria-label="접속 사용자 정보">
+            <img
+              className="user-avatar"
+              src={currentUser.profileImage}
+              alt={`${currentUser.name} 프로필 사진`}
+            />
+            <div className="user-summary-body">
+              <span className="user-summary-label">접속 사용자</span>
+              <strong>{currentUser.name}</strong>
+              <dl className="user-meta">
+                <div>
+                  <dt>부서</dt>
+                  <dd>{currentUser.department}</dd>
+                </div>
+                <div>
+                  <dt>사번</dt>
+                  <dd>{currentUser.employeeId}</dd>
+                </div>
+              </dl>
+            </div>
           </div>
         </div>
       </header>

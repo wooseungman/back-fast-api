@@ -1,9 +1,14 @@
+import os
+
 from fastapi import FastAPI, BackgroundTasks, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.orm import Session
 from typing import Optional
-from database import engine, get_db, Base
+from database import APP_ENV, engine, get_db, Base
 
 app = FastAPI(
     title="Sample FastAPI App",
@@ -13,13 +18,18 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# 데이터베이스 테이블 생성
-Base.metadata.create_all(bind=engine)
+try:
+    Base.metadata.create_all(bind=engine)
+except SQLAlchemyError as exc:
+    print(f"Database initialization skipped: {exc}")
 
-# 개발용 CORS 설정: Vite dev 서버를 허용
 origins = [
-    "http://localhost",
-    "http://localhost:5173",
+    origin.strip()
+    for origin in os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost,http://localhost:5173,http://127.0.0.1:5173",
+    ).split(",")
+    if origin.strip()
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -40,6 +50,34 @@ fake_db = {}
 @app.get("/api/hello")
 async def hello():
     return {"message": "Hello from FastAPI backend"}
+
+@app.get("/api/config")
+async def config_info():
+    return {"app_env": APP_ENV}
+
+@app.get("/api/db/health")
+async def db_health(db: Session = Depends(get_db)):
+    try:
+        result = db.execute(text("SELECT DATABASE() AS database_name, VERSION() AS version"))
+        row = result.mappings().one()
+
+        return {
+            "status": "ok",
+            "database": row["database_name"],
+            "version": row["version"],
+        }
+    except SQLAlchemyError as exc:
+        raise HTTPException(status_code=503, detail=f"Database connection failed: {exc}") from exc
+
+@app.get("/api/db/tables")
+async def db_tables(db: Session = Depends(get_db)):
+    try:
+        result = db.execute(text("SHOW TABLES"))
+        tables = [value for row in result for value in row]
+
+        return {"tables": tables}
+    except SQLAlchemyError as exc:
+        raise HTTPException(status_code=503, detail=f"Database query failed: {exc}") from exc
 
 @app.get("/api/items/{item_id}")
 async def read_item(item_id: int):

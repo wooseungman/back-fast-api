@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 export const menuItems = ['Crude', 'Diesel', 'Gasoline', 'FO', 'Aromatics']
+export const adminMenuItems = ['CodeGroups', 'CodeDetails', 'Users', 'Roles']
 
 const menuMeta = {
   Crude: 'CR',
@@ -8,6 +9,17 @@ const menuMeta = {
   Gasoline: 'GS',
   FO: 'FO',
   Aromatics: 'AR',
+  CodeGroups: 'CG',
+  CodeDetails: 'CD',
+  Users: 'US',
+  Roles: 'RL',
+}
+
+const menuLabels = {
+  CodeGroups: '코드그룹 관리',
+  CodeDetails: '코드상세 관리',
+  Users: '사용자 관리',
+  Roles: '권한 관리',
 }
 
 const LEFT_MENU_COLLAPSED_KEY = 'vco:left-menu-collapsed'
@@ -18,20 +30,21 @@ function getSavedCollapsedState(storageKey) {
   return window.localStorage.getItem(storageKey) === 'true'
 }
 
-export default function LeftFrameMenu({ activeMenu, onMenuSelect }) {
+export default function LeftFrameMenu({ activeMenu, isAdminMode, onMenuSelect }) {
   const [isCollapsed, setIsCollapsed] = useState(() => getSavedCollapsedState(LEFT_MENU_COLLAPSED_KEY))
+  const visibleMenuItems = isAdminMode ? adminMenuItems : menuItems
 
   useEffect(() => {
     window.localStorage.setItem(LEFT_MENU_COLLAPSED_KEY, String(isCollapsed))
   }, [isCollapsed])
 
   return (
-    <nav className={`nav-sidebar${isCollapsed ? ' nav-sidebar-collapsed' : ''}`}>
+    <nav className={`nav-sidebar${isCollapsed ? ' nav-sidebar-collapsed' : ''}${isAdminMode ? ' nav-sidebar-admin' : ''}`}>
       <div className="nav-logo">
-        <div className="brand-mark">V</div>
+        <div className="brand-mark">{isAdminMode ? 'A' : 'V'}</div>
         <h2 className="nav-title">
-          <span className="font-bold-rose-600">SKI</span> VCO
-          <span className="nav-title-sub">Back-casting</span>
+          <span className="font-bold-rose-600">SKI</span> {isAdminMode ? 'Admin' : 'VCO'}
+          <span className="nav-title-sub">{isAdminMode ? 'Management Console' : 'Back-casting'}</span>
         </h2>
         <button
           type="button"
@@ -44,8 +57,9 @@ export default function LeftFrameMenu({ activeMenu, onMenuSelect }) {
         </button>
       </div>
       <ul className="mt-5 list-none" id="menu-list">
-        {menuItems.map((item) => {
+        {visibleMenuItems.map((item) => {
           const isActive = item === activeMenu
+          const label = menuLabels[item] ?? item
 
           return (
             <li
@@ -63,14 +77,14 @@ export default function LeftFrameMenu({ activeMenu, onMenuSelect }) {
               }}
             >
               <span className="menu-item-code">{menuMeta[item]}</span>
-              <span className="menu-item-label">{item}</span>
+              <span className="menu-item-label">{label}</span>
             </li>
           )
         })}
       </ul>
       <div className="nav-footer">
-        <span className="nav-footer-label">Current view</span>
-        <strong>{activeMenu}</strong>
+        <span className="nav-footer-label">{isAdminMode ? 'Admin menu' : 'Current view'}</span>
+        <strong>{menuLabels[activeMenu] ?? activeMenu}</strong>
       </div>
     </nav>
   )

@@ -22,6 +22,6 @@ const page = {
   ],
 }
 
-export default function FoPage() {
-  return <DashboardPage menuName="FO" page={page} />
+export default function FoPage(props) {
+  return <DashboardPage menuName="FO" page={page} {...props} />
 }
